@@ -19,8 +19,8 @@ class TSPSolver
   puts "\n===== RESULT ====="
     puts "Jarak minimum: #{result[:distance]}"
     puts "Path optimal: #{result[:path].join(' -> ')}"
-    puts "Waktu eksekusi: #{(end_time - start_time).round(2)} ms"
-    puts "Jumlah state yang dihitung: #{@memo.size}"
+    puts "Waktu eksekusi: #{((end_time - start_time) * 1000).round(2)} ms"
+    puts "Jumlah state yang dikunjungi: #{@memo.size}"
     result
   end
 
@@ -48,7 +48,6 @@ class TSPSolver
       raise ArgumentError, "Jarak diagonal harus 0" unless row[i] == 0
     end
   end
-  
 
   def tsp(mask, pos)
     if mask == (1 << @n) - 1
@@ -96,26 +95,6 @@ class TSPSolver
     end
     path << 0
     path
-  end
-  
-  def solve_with_details
-    puts "=== Traveling Salesman Problem Solver ==="
-    puts "Jumlah kota: #{@n}"
-    puts "Matrix jarak:"
-    display_matrix
-    
-    puts "\nMenyelesaikan TSP..."
-    start_time = Time.now
-    result = solve
-    end_time = Time.now
-    
-    puts "\n=== HASIL ==="
-    puts "Jarak minimum: #{result[:distance]}"
-    puts "Path optimal: #{result[:path].join(' -> ')}"
-    puts "Waktu eksekusi: #{(end_time - start_time).round(4)} detik"
-    puts "Jumlah state yang dihitung: #{@memo.size}"
-    
-    result
   end
   
   def display_matrix
